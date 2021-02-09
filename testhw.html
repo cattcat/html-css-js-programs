@@ -1,0 +1,49 @@
+</pre><pre name=”code” class=”javascript”>
+    <html>
+    <body>
+    <input type=”button” name=”input[]” value=”按鈕1″ /><br />
+    <input type=”button” name=”input[]” value=”按鈕2″ /><br />
+    <input type=”button” name=”input[]” value=”按鈕3″ /><br />
+    
+    <div id=”add”></div>
+    </body>
+    </html>
+    
+    <script >
+    
+    // 通過 getElementsByTagName 獲得都有 input 控制元件
+    var inputs =document.getElementsByTagName(“input”);
+    // 為第0個button繫結onclick事件，alert一下
+    inputs[0].onclick = function(){
+    alert(“我測試一下”);
+    }
+    
+    // 為每一個button繫結onclick事件，alert一下
+    for(var i=0;i<inputs.length;i ){
+    inputs[i].onclick = function(){
+    alert(“我測試一下”);
+    }
+    }
+    
+    window.onload = function(){
+    // 定義一個陣列 arrs
+    var arrs = new Array();
+    // 迴圈新增
+    for(var i=0;i<2;i ){
+    // 迴圈新增兩個 input type=”button” value=”新增” i
+    var input = document.createElement(“input”);
+    input.type = “button”;
+    input.value = “新增” i;
+    // 記得把建立的 input 放入 arrs 中
+    arrs.push(input);
+    // 然後把 input 放入 id=”add” 的div中
+    document.getElementById(“add”).appendChild(input);
+    }
+    
+    // 同樣用 [0].onclick 繫結事件，依然沒有問題
+    arrs[0].onclick=function(){
+    alert(“我又測試一下”);
+    }
+    
+    }
+    </script>

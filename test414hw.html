@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>比大小</title>
+    <style>
+        .box{
+            border: 2px solid black;
+            padding: 5px;
+        }
+        #ans{
+            background-color: coral;
+        }
+        .show{
+            border: 2px dashed yellowgreen;
+        }
+        .win{
+            color:blue;
+            border: 2px;
+        }
+        .loss{
+            color: red;
+            border: 2px;
+        }
+    </style>
+    <script>
+        function play(){
+            var num =document.getElementById("num").Value;
+            var comp_num = Math.floor(Math.random()*10)+1;
+            var bet = document.querySelector('input[name="bet_radio":checked').Value;
+            var dir = Math.floor(math.random()*2)
+            var ans ="這次比";
+            var mes = "你的數字為" + num + "<br>"+ "電腦選的數字" + comp_num + "<br>" + "賭注大小為" + bet +"<br>";
+
+
+            if(isNaN(num) || num <1 || num>10 ){
+                alert("請輸入1~10");
+                document.getElementById("num").Value="";
+                return;
+                }
+
+                document.getElementById("ans").className="win";
+                if (dir){
+                    ans+="大";
+                    if(num>comp_num) ans+="你贏了" + bet;
+                    else {
+                        ans+="你輸了" + bet;
+                        document.getElementById("ans").className="lose";
+                    }
+                }
+                else{
+                    ans+="小";
+                    if(num>comp_num) ans+="你贏了" + bet;
+                    else {
+                        ans+="你輸了" + bet;
+                        document.getElementById("ans").className="lose";
+                    }
+                }
+                document.getElementById("message").innerHTML = mes;
+                document.getElementById("ans").innerHTML= ans ; 
+
+        }
+
+    </script>
+</head>
+<body>
+    <div class=box>
+        <h1>請輸入一個數值</h1>
+        <input type="text" id="num">
+    </div>
+    <div>
+        <span>賭注</span>
+        <input type="radio" name="bet_radio" value="100" checked="checked">100</input>
+        <input type="radio" name="bet_radio" value="500">500</input>
+        <input type="radio" name="bet_radio" value="1000">1000</input>
+    </div>
+    <div>
+        <input type="button" value="比大小" onclick="play()"></input>
+    </div>
+    <div>
+        <h2 id = "message"></h2>
+        <h1 id = "ans" class="show"></h1>
+    </div>
+</body>
+</html>

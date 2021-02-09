@@ -1,0 +1,48 @@
+<html>
+<body style="font-size: 9pt">
+<script>
+var raw = [];
+var ary = [];
+var arr_name =[];
+function array(){
+            
+            raw.push(document.getElementById("name").value);
+            //arr_tel.push(document.getElementById("tel").value);
+            document.getElementById("name").value='';
+            //document.getElementById("tel").value='';
+            alert("新增成功");
+        }
+function ch_sort(){
+for (var i = 0; i < raw.length; i++)
+    ary.push(raw.substr(i, 1));
+    document.write("原始順序(BIG5/筆劃)<br />")
+    document.write(JSON.stringify(ary, null ," "));
+    document.write("<hr />")
+    ary.sort();
+ 
+    document.write("內建 sort()<br />")
+    document.write(JSON.stringify(ary, null ," "));
+    document.write("<hr />")
+    ary.sort(function(a,b) { return a.localeCompare(b); });
+ 
+    document.write("localeCompare 排序<br />")
+    document.write(JSON.stringify(ary, null ," "));
+    document.write("<hr />")
+    if (navigator.userAgent.indexOf("Chrome") != -1 
+        || navigator.userAgent.indexOf("Safari") != -1) {
+        // chrome 和 Safari 瀏覽器需用 "zh_Hant"
+        ary.sort(function(a,b) { return a.localeCompare(b, "zh-Hant"); });  
+    } else {
+        // 其他瀏覽器使用 "zh-TW"
+        ary.sort(function(a,b) { return a.localeCompare(b, "zh-TW"); }); 
+    }
+    document.write("localeCompare zh-TW 排序<br />")
+    document.write(JSON.stringify(ary, null ," "));
+}
+</script>
+<h1 class="text">請輸入姓名</h1>
+<input type="text" name="name" id="name"><br>
+<input type="button" onclick="array()" value="新增"><br>
+<input type="button" value="姓氏排序" onclick="ch_sort()">
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html >
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name = "viewport" content="width=device-width,initial-scale = 1.0">
+        <title>9*9乘法表</title>
+        <style>
+            table{
+                border: 1px solid red;
+            } 
+             tr ,td{
+                border:1px solid black
+            }
+        </style>
+        <script>
+            function myFunction(){
+                var n;
+                var i,j;
+                var outputStr = "";
+                n=parseInt(document.getElementById("num").value);
+                //debugger
+                for(i=1; i <=n; i++){
+                outputStr+="<tr>";
+                    for(j=1; j<=n; j++){
+                        outputStr += "<td>"
+                        outputStr += i + "*" + j + "=" + i*j;
+                        outputStr += "</td>"
+                    }
+                    outputStr += "</tr>"
+                }
+                document.getElementById("myTable").innerHTML = outputStr;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>輸入一個值 </h1>
+        <input id="num">
+        <button type="button" onclick="myFunction()">ok</button>
+        <table id = "myTable"></table>
+    </body>
+</html>

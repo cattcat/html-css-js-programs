@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>比大小</title>
+    </head>
+    <script> 
+        function getradio(){
+        var selectedIndex = -1;
+        var form777 = document.getElementById("form1");
+        var i = 0;
+
+        for (i=0; i<form777.money.length; i++){
+            if (form777.money[i].checked){
+            selectedIndex = i;
+            form777.innerHTML("此回合下注：" + form777.money[i].value);
+            }
+        }
+
+        if (selectedIndex < 0){
+            alert("你沒有下注");
+            return 0;
+            }
+        }
+
+        function playgame() {
+        var a = document.getElementById("a").value;
+        var b = Math.floor(Math.random()*10)+1;
+        var c = document.getElementById("result");
+        var s = document.getElementById("show");
+        var s2 = document.getElementById("show2");
+        
+        
+        if (a<1 || a>10){
+            alert('請重新輸入');   
+            return 0 ;
+        }
+        if (a>b){
+            s.innerHTML='你的數字為'+a;
+            s2.innerHTML='電腦的數字為'+b;
+            c.innerHTML='你贏了';
+        }
+        else if (a<b){
+            s.innerHTML='你的數字為'+a;
+            s2.innerHTML='電腦的數字為'+b;
+            c.innerHTML='你輸了'; 
+        }
+        else {
+            s.innerHTML='你的數字為'+a;
+            s2.innerHTML='電腦的數字為'+b;
+            c.innerHTML='平手';
+        }
+    }
+    </script> 
+    <body style="background-color: aquamarine;">
+        請輸入1~10數字<input name="a" id="a" type="text"/><br>
+        <form id="form1">
+        賭注:<br>
+        <input name="money" id="m1" type="radio" value="100"/>100
+        <input name="money" id="m2" type="radio" value="500"/>500
+        <input name="money" id="m3" type="radio" value="1000"/>1000<br>
+        </form>
+        <input name="button" type="button" style=width:150px;height:40px onclick="playgame();getradio()"value="比大小"/>
+        <p id = show> </p>
+        <p id = show2> </p>
+        <p id = form1></p>
+        <p id = result style="color: blue;"> </p>
+    </body>
+</html>
