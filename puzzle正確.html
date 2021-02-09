@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拼圖遊戲(完整版)</title>
+    <style>
+        .puzzleBoard {
+            position: relative;
+            background-color: lightgreen;
+            border: 1px solid brown;
+        }
+        
+        .puzzleCell {
+            position: absolute;
+            background-color: bisque;
+            margin: 2px;
+            border: 1px solid black;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        .complete {
+            background-color: red;
+        }
+
+        #replay{
+            visibility: hidden;
+        }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var num = 0;
+        var oirginLeft = 5;
+        var originTop = 5;
+        var divNode;
+        var hiddenId;
+        var totalMoves;
+
+        $(document).ready(function() {
+            $("button").click(function() {
+                totalMoves = 0;
+                num = parseInt($("#num").val());
+                setPuzzleBoard(num);
+                shuffle();
+            });
+
+            $(document).on("click", ".puzzleCell", function() {
+                var cellId = parseInt($(this).attr("id").substr(3));
+                // alert(cellId);
+                var r = parseInt(cellId / num);
+                var c = parseInt(cellId % num);
+
+                swapCell(r, c, -1, 0);
+                swapCell(r, c, 1, 0);
+                swapCell(r, c, 0, -1);
+                swapCell(r, c, 0, 1);
+
+                testComplete();
+                totalMoves++;
+                $("#message").text("移動" + totalMoves + "步。")
+            });
+        });
+
+        function swapCell(r, c, rd, cd) {
+            var ra = r + rd;
+            var ca = c + cd;
+            var srcId, srcNode, srcLabel;
+            var dstId, dstNode, dstLabel;
+
+            if ((ra >= 0) && (ra <= num - 1) && (ca >= 0) && (ca <= num - 1)) {
+                srcId = r * num + c;
+                srcNode = $("#puzzleBoard").children().eq(srcId);
+                srcLabel = srcNode.text();
+                dstId = ra * num + ca;
+                dstNode = $("#puzzleBoard").children().eq(dstId);
+                dstLabel = dstNode.text();
+
+                if (dstNode.css("visibility") == "hidden") {
+                    dstNode.text(srcLabel).css("visibility", "visible");
+                    srcNode.text(dstLabel).css("visibility", "hidden");
+                    hiddenId = srcId;
+                }
+            }
+        }
+
+        function setPuzzleBoard(n) {
+            var divNum = 0;
+
+            $("#puzzleBoard").empty();
+            $("#puzzleBoard").removeClass("complete");
+            $("#puzzleBoard").addClass("puzzleBoard").css("width", 10 + n * 54).css("height", 10 + n * 54);
+            for (var i = 0; i < num; i++) {
+                for (var j = 0; j < num; j++) {
+                    divNode = $("<div></div>").text(divNum).attr("id", "div" + divNum).appendTo("div#puzzleBoard");
+                    divNode.addClass("puzzleCell").css("left", oirginLeft + 54 * j).css("top", originTop + 54 * i);
+                    if (divNum == n * n - 1) {
+                        divNode.css("visibility", "hidden");
+                        hiddenId = divNum;
+                    }
+                    divNum++;
+                }
+            }
+        }
+
+        function shuffle() {
+            var SHUFFLE_NUM = 1000;
+            var shuffle_moves = 0;
+            var r, c, cur_r, cur_c, ran_r, ran_c;
+            var shuffle_dir1 = 0.5, //亂數產生是否往列或行變化, >0.5往列方向，<0.5往行方向
+                shuffle_dir2 = 0.5; //產生亂數判斷加減 列/行
+
+            for (var i = 1; i <= SHUFFLE_NUM; i++) {
+                r = parseInt(hiddenId / num);
+                c = hiddenId % num;
+                cur_r = r;
+                cur_c = c;
+                ran_r = 0;
+                ran_c = 0;
+                shuffle_dir1 = Math.random();
+                shuffle_dir2 = Math.random();
+
+                if (shuffle_dir1 > 0.5) { //往列方向打亂
+                    ran_r = (shuffle_dir2 > 0.5) ? 1 : -1; //ran_r = 1: 下一列, -1: 上一列
+                    cur_r = r + ran_r;
+                } else { //往行方向打亂
+                    ran_c = (shuffle_dir2 > 0.5) ? 1 : -1; //ran_c = 1: 下一行, -1: 上一行
+                    cur_c = c + ran_c;
+                }
+                if ((cur_r >= 0) && (cur_r <= num - 1) && (cur_c >= 0) && (cur_c <= num - 1)) {
+                    swapCell(cur_r, cur_c, -ran_r, -ran_c);
+                    shuffle_moves++;
+                }
+            }
+            // alert(shuffle_moves);
+        }
+
+        function testComplete() {
+
+            var cell;
+            var cellId, cellLabel;
+            var cellNum = $("#puzzleBoard").children().length;
+            var i = 0;
+
+            while (i < cellNum) {
+                cell = $("#puzzleBoard").children().eq(i);
+                cellId = parseInt(cell.attr("id").substr(3));
+                cellLabel = parseInt(cell.text());
+                if ((cellId - cellLabel) != 0) return;
+                else i++;
+            }
+
+            $("#message").text("成功解出拼圖，總共移動了" + totalMoves + "步。");
+            $("#puzzleBoard").addClass("complete");
+            $("#replay").css("visibility","visible");
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <h1>請輸入一個數值N</h1>
+    <input type="text" id="num">
+    <button id="play">輸入拼圖大小</button>
+    <br />
+    <div id="puzzleBoard"></div>
+    <br/>
+    <p id="message"></p>
+    <button id="replay">重玩</button>
+</body>
+
+</html>
+

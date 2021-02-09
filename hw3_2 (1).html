@@ -4,67 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>聯絡人資訊</title>
-    <style>
-        body {font: 14px/1.6 Helvetica, Arial, "微軟正黑體", "Microsoft JhengHei", sans-serif;color: #555;background-color: darkgrey;}
-        .text{color: brown;size:20px;}
-        .show {color:black;font-weight: bold;vertical-align: top;}
-        tr ,td{border:1px solid black;}
-        table{ border: 1px solid red;} 
-    </style>
+    <style></style>
     <script>
-        var arr_name =[];
-        var arr_tel =[];
+        var String = document.getElementById("name").value;
+        var arr = new array();
+        var arr = String.split("-");
+
         function array(){
-            if (document.getElementById("tel").value.length > 10 ){
-                alert("最多10個數字");
-                document.getElementById("tel").Value="";
-                return;
-            }
-            arr_name.push(document.getElementById("name").value);
-            arr_tel.push(document.getElementById("tel").value);
-            document.getElementById("name").value='';
-            document.getElementById("tel").value='';
-            alert("新增成功");
-            //arr_name[arr_name.length]=document.getElementById("name").value;
-            //document.getElementById("show_name").innerHTML = arr_name; 
-            //arr_tel[arr_tel.length]=document.getElementById("tel").value;
-            //document.getElementById("show_tel").innerHTML = arr_tel; 
+            arr[arr.length]=document.getElementById("name").value;
+        document.getElementById("show_name").innerHTML = arr[0] + ",";
+        document.getElementById("show_name").innerHTML = arr[1] ;  
         }
-        function ch_sort(){
-            var raw = "趙錢孫李周吳鄭王馮陳褚衛蔣";
-            var ary = [];
-            for (var i = 0; i < raw.length; i++)
-            document.write("localeCompare 排序<br />")
-            document.write(JSON.stringify(ary, null ," "));
-            document.write("<hr />")
-            if (navigator.userAgent.indexOf("Chrome") != -1 
-                || navigator.userAgent.indexOf("Safari") != -1) {
-                    // chrome 和 Safari 瀏覽器需用 "zh_Hant"
-                ary.sort(function(a,b) { return a.localeCompare(b, "zh-Hant"); });  
-            }else {
-                    // 其他瀏覽器使用 "zh-TW"
-                ary.sort(function(a,b) { return a.localeCompare(b, "zh-TW"); }); 
-                }
-            document.write("localeCompare zh-TW 排序<br />")
-            document.write(JSON.stringify(ary, null ," "));
-            }
-        function tel_sort(){
-            arr_tel.sort();
-            document.getElementById("show_tel").innerHTML = arr_tel  ;
-            
-        }
+        
     </script>
 </head>
 <body>
-    <h1 class="text">請輸入姓名</h1>
+    <h1>請輸入姓名</h1>
     <input type="text" name="name" id="name"><br>
-    <h1 class="text">請輸入電話</h1>
-    <input type="number" name="tel" id="tel"><br>
-    <input type="button" onclick="array()" value="新增"><br>
-    <input type="button" value="手機排序" onclick="tel_sort()">
-    <input type="button" value="姓氏排序" onclick="ch_sort()">
-    <h2 id="show_name" class="show"></h2>
-    <table id="show_tel" class="show"></table>
-
+    <input type="button" onclick="array()" value="顯示"><br>
+    <h2 id="show_name"></h2>
 </body>
 </html>

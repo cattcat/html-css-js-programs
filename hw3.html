@@ -4,55 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>聯絡人資訊</title>
-    <style>
-        body {font: 14px/1.6 Helvetica, Arial, "微軟正黑體", "Microsoft JhengHei", sans-serif;color: #555;background-color: darkgrey;}
-        .text{color: brown;size:20px;}
-        .show {color:black;font-weight: bold;vertical-align: top;}
-        tr ,td{border:1px solid black;}
-        table{ border: 1px solid red;} 
-    </style>
+    <style></style>
     <script>
         var arr_name =[];
         var arr_tel =[];
-        function array(){
-            if (document.getElementById("tel").value.length > 10 ){
-                alert("最多10個數字");
-                document.getElementById("tel").Value="";
-                return;
-            }
-            arr_name.push(document.getElementById("name").value);
-            arr_tel.push(document.getElementById("tel").value);
-            document.getElementById("name").value='';
-            document.getElementById("tel").value='';
-            alert("新增成功");
-            //arr_name[arr_name.length]=document.getElementById("name").value;
-            //document.getElementById("show_name").innerHTML = arr_name; 
-            //arr_tel[arr_tel.length]=document.getElementById("tel").value;
-            //document.getElementById("show_tel").innerHTML = arr_tel; 
+        function array_name(){
+            arr_name[arr_name.length]=document.getElementById("name").value;
+        document.getElementById("show_name").innerHTML = arr_name; 
         }
-        function ch_sort(){
-            arr_name.sort();
-            document.getElementById("show_name").innerHTML = arr_name;
-            document.getElementById("name_len").innerHTML = "總共有" + arr_name.length + "筆資料";
-        }
-        function tel_sort(){
-            arr_tel.sort();
-            document.getElementById("show_tel").innerHTML = arr_tel  ;
-            document.getElementById("tel_len").innerHTML = "總共有" + arr_tel.length + "筆資料" ;
+        function array_tel(){
+            arr_tel[arr_tel.length]=document.getElementById("tel").value;
+        document.getElementById("show_tel").innerHTML = arr_tel; 
         }
     </script>
 </head>
 <body>
-    <h1 class="text">請輸入姓名</h1>
+    <h1>請輸入姓名</h1>
     <input type="text" name="name" id="name"><br>
-    <h1 class="text">請輸入電話</h1>
-    <input type="number" name="tel" id="tel"><br>
-    <input type="button" onclick="array()" value="新增"><br>
-    <input type="button" value="手機排序" onclick="tel_sort()">
-    <input type="button" value="姓氏排序" onclick="ch_sort()">
-    <table id="show_name" class="show"></table>
-    <h2 id="name.len" class="show"><h2>
-    <table id="show_tel" class="show"></table>
-    <h2 id="tel_len" class="show"><h2>
+    <h1>請輸入電話</h1>
+    <input type="tel" name="tel" id="tel" minlength="10" maxlength="10"><br>
+    <input type="button" onclick="array_name();array_tel()" value="顯示"><br>
+    <h2 id="show_name"></h2>
+    <h2 id="show_tel"></h2>
+
 </body>
 </html>
