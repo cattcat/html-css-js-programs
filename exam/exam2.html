@@ -1,0 +1,62 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>奇偶數遊戲</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#slider-range-max" ).slider({
+      range: "max",
+      min: 1,
+      max: 10,
+      value: 2,
+      slide: function( event, ui ) {
+        $( "[name='amount']" ).val( ui.value );
+      }
+    });
+    $( "[name='amount']" ).val( $( "#slider-range-max" ).slider( "value" ) );
+  } );
+  </script>
+   <script>
+    function playgame() {
+    var a = document.getElementById("num").value;
+    var b = Math.floor(Math.random()*10)+1;
+    var c = document.getElementById("result");
+    var s = document.getElementById("show");
+    var s2 = document.getElementById("show2");
+    var t = document.getElementById("total");
+    var tot = parseInt(a)+parseInt(b);
+
+    if (a<1 || a>10){
+    alert('請重新輸入');
+    return 0 ;
+    }
+    if((tot%2)===0){
+    s.innerHTML='你的數字為'+a;
+    s2.innerHTML='電腦的數字為'+b;
+    t.innerHTML='總和為'+tot;
+    c.innerHTML='數字為偶數，你輸了';
+    }
+    else {
+    s.innerHTML='你的數字為'+a;
+    s2.innerHTML='電腦的數字為'+b;
+    t.innerHTML='總和為'+tot;
+    c.innerHTML='數字為奇數，你贏了';
+    }
+    }
+</script>
+</head>
+<body>
+    輸入使用者的數值:<input type="text" id="num" name="amount" >
+    <input type="button" id="play" value="輸入" onclick="playgame()"> 
+<p id ="show"></p>
+<p id ="show2"></p>
+<p id ="total"></p>
+<p id ="result"></p>
+<div id="slider-range-max"></div>
+</body>
+</html>

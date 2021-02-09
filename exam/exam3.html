@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        .box{
+            width:150px;
+            height:150px;
+            padding:10px;
+            border:1px #ccc dashed;
+            background-color: darkgrey;
+            float:left;
+            margin-right:10px;
+        }
+        
+        #Box1,#Box2,#Box3{
+            display: inline-block;
+        }
+        #Img1{
+            width:100px;
+            height:100px;
+            border: 1px black;
+            background-color: red;
+        }
+        #Img2{
+            width:100px;
+            height:100px;
+            border: 1px black;
+            background-color: blue;
+        }
+        #Img3{
+            width:100px;
+            height:100px;
+            border: 1px black;
+            background-color: green;
+        }
+        
+        </style>
+        <script>
+            var a = document.getElementById("Box1");
+            var b = document.getElementById("Box2");
+            var c = document.getElementById("Box3");
+            function AllowDrop(event){
+                event.preventDefault();
+                a.style.backgroundColor="red";
+            }
+            function AllowDrop2(event){
+                event.preventDefault();
+                b.style.backgroundColor="green";
+            }
+            function AllowDrop3(event){
+                event.preventDefault();
+                c.style.backgroundColor="blue";
+            }
+            function Drag(event){
+                event.dataTransfer.setData("text",event.currentTarget.id);
+            }
+            function Drop(event){
+                event.preventDefault();
+                var data=event.dataTransfer.getData("text");
+                event.currentTarget.appendChild(document.getElementById(data));
+            }
+        </script>
+</head>
+<body>
+<div id="Img1"  draggable="true" ondragstart="Drag(event)"></div>
+<div id="Img2"  draggable="true" ondragstart="Drag(event)"></div>
+<div id="Img3"  draggable="true" ondragstart="Drag(event)"></div>
+<div id="Box1" class="box" ondrop="Drop(event)" ondragover="AllowDrop(event)">紅色</div>
+<div id="Box2" class="box" ondrop="Drop(event)" ondragover="AllowDrop2(event)">綠色</div>
+<div id="Box3" class="box" ondrop="Drop(event)" ondragover="AllowDrop3(event)">藍色</div>
+<div style="clear:both;"></div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery操作</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#h5").click(function(){
+            $("#num").text("學號:4a6g0914 姓名:張睿珉");
+            });
+        });
+        $(document).ready(function(){
+            $("#java").click(function(){
+            $("#java1").css("color", "red");
+            $("#java2").css("color", "red");
+            });
+        });
+        $(document).ready(function(){
+            $("#color").click(function(){
+            $("body").css("background-color", "yellow");
+            });
+        });
+        $(document).ready(function(){
+            $("#vis").click(function(){
+                alert("完成!");
+            $("body").hide();
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="button" id="h5" value="產生一個h5節點">
+    <input type="button" id="java" value="將具有java字樣的節點字體改為紅色">
+    <input type="button" id="color" value="將網頁背景改為黃色">
+    <input type="button" id="vis" value="隱藏所有網頁內容">
+    <h1>我的學號和姓名</h1>
+    <h5 id="num"></h5>
+    <h2>我學過的程式語言</h2>
+    <ul>
+        <li>C</li>
+        <li>C++</li>
+        <li>C#</li>
+        <li id ="java1">Java</li>
+        <li id ="java2">Javascript</li>
+        <li>sql</li>
+        <li>Python</li>
+    </ul>
+</body>
+</html>
